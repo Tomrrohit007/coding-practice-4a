@@ -37,6 +37,8 @@ const convertDbObjectToResponseObject = (dbObject) => {
   };
 };
 
+//API 1
+
 app.get("/players/", async (request, response) => {
   const getPlayersQuery = `
     SELECT
@@ -51,6 +53,8 @@ app.get("/players/", async (request, response) => {
   );
 });
 
+//API 2
+
 app.get("/players/:playerId/", async (request, response) => {
   const { playerId } = request.params;
   const getPlayerQuery = `
@@ -64,6 +68,8 @@ app.get("/players/:playerId/", async (request, response) => {
   response.send(convertDbObjectToResponseObject(player));
 });
 
+// API 3
+
 app.post("/players/", async (request, response) => {
   const { playerName, jerseyNumber, role } = request.body;
   const postPlayerQuery = `
@@ -74,6 +80,8 @@ app.post("/players/", async (request, response) => {
   const player = await database.run(postPlayerQuery);
   response.send("Player Added to Team");
 });
+
+// API 4
 
 app.put("/players/:playerId/", async (request, response) => {
   const { playerName, jerseyNumber, role } = request.body;
@@ -92,6 +100,8 @@ app.put("/players/:playerId/", async (request, response) => {
   response.send("Player Details Updated");
 });
 
+//API 5
+
 app.delete("/players/:playerId/", async (request, response) => {
   const { playerId } = request.params;
   const deletePlayerQuery = `
@@ -102,4 +112,5 @@ app.delete("/players/:playerId/", async (request, response) => {
   await database.run(deletePlayerQuery);
   response.send("Player Removed");
 });
+
 module.exports = app;
